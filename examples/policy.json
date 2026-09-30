@@ -1,0 +1,8 @@
+{
+  "allowed_tools": ["search_docs"],
+  "max_tool_calls": 5,
+  "max_output_chars": 2000,
+  "required_output_keys": [],
+  "forbidden_output_terms": [],
+  "threshold": 0.95
+}

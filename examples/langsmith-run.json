@@ -1,0 +1,18 @@
+{
+  "id": "synthetic-root",
+  "run_type": "chain",
+  "name": "support_agent",
+  "inputs": {"question": "What is the return window?"},
+  "outputs": {"answer": "30 days."},
+  "end_time": "2026-09-30T12:00:01Z",
+  "child_runs": [
+    {
+      "run_type": "tool",
+      "name": "search_docs",
+      "inputs": {"query": "return window"},
+      "outputs": {"text": "Returns are accepted within 30 days."},
+      "end_time": "2026-09-30T12:00:00Z",
+      "child_runs": []
+    }
+  ]
+}
