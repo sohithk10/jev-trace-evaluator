@@ -3,6 +3,24 @@
 A CLI-first evaluator for recorded agent runs. It combines local security and
 output guardrail checks with optional JEV judgments through LangChain.
 
+![JEV Trace Observatory: local evaluation dashboard with trace input, policy failures, and human-review findings](docs/ui-screenshot.png)
+
+## Local web UI
+
+After installation, run `jev-eval ui` and open **http://127.0.0.1:8765**.
+Use `jev-eval ui --port 8766` to select another port.
+
+Load the synthetic demo or upload JSON/JSONL traces, set a comma-separated tool
+allowlist, and click **Run evaluation**. Inspect individual findings and download
+the JSON report. The screenshot above shows the synthetic demo, not production data.
+
+The UI runs offline checks only and uses the other default policy settings. It
+does not call JEV, request API keys, or upload traces externally. Use the CLI for
+custom policies and opt-in live judging. The server binds only to IPv4 loopback,
+checks Host/Origin and a per-session token, and stores no uploaded files. Do not
+expose it through a public proxy. The README image appears on the GitHub repository
+front page; this is a local application, not a GitHub Pages deployment.
+
 Inspired by [JEV-as-a-Judge: Accept When Confident, Escalate When Unsure](https://arxiv.org/abs/2609.26550).
 This is an independent implementation, not the paper's benchmark reproduction.
 It uses confidence gating, but escalates uncertain cases to **human review**, not

@@ -13,6 +13,8 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description="Audit traces locally or evaluate with JEV. Never executes trace tools.")
     parser.add_argument("--version", action="version", version=__version__)
     sub = parser.add_subparsers(dest="command", required=True)
+    ui = sub.add_parser("ui", help="Open a loopback-only offline evaluation dashboard")
+    ui.add_argument("--port", type=int, default=8765)
     check = sub.add_parser("evaluate", help="Evaluate a JSON/JSONL trace export")
     check.add_argument("traces")
     check.add_argument("--policy")
@@ -21,6 +23,12 @@ def main(argv=None):
     check.add_argument("--model", default="jev-latest")
     check.add_argument("--max-live-traces", type=int, default=10, help="Maximum live judge calls; default 10")
     args = parser.parse_args(argv)
+    if args.command == "ui":
+        from .web import serve
+        if not 1 <= args.port <= 65535:
+            parser.error("Port must be between 1 and 65535")
+        serve(args.port)
+        return 0
     try:
         policy = policy_from(args.policy)
         traces = load_traces(args.traces)
