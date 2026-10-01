@@ -3,6 +3,9 @@
 A CLI-first evaluator for recorded agent runs. It combines local security and
 output guardrail checks with optional JEV judgments through LangChain.
 
+**[Try the interactive mock on GitHub Pages](https://sohithk10.github.io/jev-trace-evaluator/)**
+— synthetic examples only; no backend, uploads, or live model calls.
+
 ![JEV Trace Observatory: local evaluation dashboard with trace input, policy failures, and human-review findings](docs/ui-screenshot.png)
 
 ## Local web UI
@@ -19,7 +22,13 @@ does not call JEV, request API keys, or upload traces externally. Use the CLI fo
 custom policies and opt-in live judging. The server binds only to IPv4 loopback,
 checks Host/Origin and a per-session token, and stores no uploaded files. Do not
 expose it through a public proxy. The README image appears on the GitHub repository
-front page; this is a local application, not a GitHub Pages deployment.
+front page. The real evaluator runs locally; GitHub Pages hosts a separate synthetic-only mock.
+
+### Rebuild the hosted mock
+
+Run `python scripts/build_demo.py` after changing the local UI. This generates the
+static demo in `docs/`, with read-only fixtures and an explicitly labeled mock report.
+GitHub Pages publishes `main` → `/docs`. No API keys or server are deployed.
 
 Inspired by [JEV-as-a-Judge: Accept When Confident, Escalate When Unsure](https://arxiv.org/abs/2609.26550).
 This is an independent implementation, not the paper's benchmark reproduction.
